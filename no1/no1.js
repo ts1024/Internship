@@ -1,14 +1,18 @@
 /********* no1 a) *********/
 function fn_no1_a (str, output){
-	var charList = {};
-	for (var i = 0, len = str.length; i < len; i++) {
-		if (charList[str[i]]) {
-			output("false");
-			return;
+	if (str) {
+		var charList = {};
+		for (var i = 0, len = str.length; i < len; i++) {
+			if (charList[str[i]]) {
+				output("false");
+				return;
+			}
+			charList[str[i]] = true;
 		}
-		charList[str[i]] = true;
+		output("true");
+	} else {
+		output("");
 	}
-	output("true");
 }
 
 /********* no1 b) *********/
