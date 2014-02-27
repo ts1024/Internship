@@ -53,6 +53,48 @@ qu.size(); // 1
 qu.peek(); // 456
 
 */
+
+function Queue (){
+	this.st1 = new Stack();
+}
+Queue.prototype = {
+	add: function (value){
+		this.st1.push(value);
+	},
+	peek: function (){
+		var st2 = new Stack();
+		var len = this.size();
+		while (len-- > 0) {
+			st2.push(this.st1.peek());
+		}
+		return st2.peek();
+	},
+	remove: function (value){
+		var st2 = new Stack();
+		while (this.size() > 0) {
+			st2.push(this.st1.pop());
+		}
+		var ret = st2.pop();
+		while (st2.size() > 0) {
+			this.st1.push(st2.pop());
+		}
+		return ret;
+	},
+	size: function (){
+		return this.st1.size();
+	},
+	getList: function (){
+		var ret = [];
+		for (var i = 0, len = this.st1._list.length; i < len; i++) {
+			ret.push(this.st1._list[len - 1 - i]);
+		}
+		return ret;
+	}
+};
+
+
+// «ŠÔˆá‚¦‚Ä‚¢‚½
+/*
 function Queue (){
 	this._list = [];
 }
@@ -72,3 +114,7 @@ Queue.prototype = {
 		return this._list.length
 	}
 };
+*/
+
+
+

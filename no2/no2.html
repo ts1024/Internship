@@ -68,7 +68,7 @@ var list = ["qu = new Queue()",
 for (var i = 0, len = list.length; i < len; i++) {
 	var str = list[i];
 	var result = eval(str);
-	document.write("<tr><td>" + str + "</td><td>" + (typeof result === "undefined" ? "void" : result) + "</td><td>[" + qu._list.join(", ") + "]</td></tr>");
+	document.write("<tr><td>" + str + "</td><td>" + (typeof result === "undefined" ? "void" : result) + "</td><td>[" + qu.getList().join(", ") + "]</td></tr>");
 }
 </script> 
 </tbody></table>
