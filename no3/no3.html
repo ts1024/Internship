@@ -1,0 +1,40 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="Content-Script-Type" content="text/javascript"> 
+<meta http-equiv="Content-Style-Type" content="text/css">
+<script type="text/javascript" charset="utf-8" src="no3.js"></script>
+<title>no3</title>
+<script language="javascript">
+function $(id){
+	return document.getElementById(id);
+}
+</script>
+<style>
+body {
+	width:800px;
+	margin: 0 auto;
+}
+body > div {
+	border:solid black 2px;
+	margin-bottom: 10px;
+}
+</style>
+</head>
+<body> 
+
+<!-- 問題 ここから -->
+<div>
+<table border="1"><tbody>
+<tr><td>n</td><td>組み合わせ数</td><td>結果</td></tr>
+<script language="javascript">
+for (var i = 1, len = 7; i <= len; i++) {
+	document.write("<tr><td>" + i + "</td><td>" + kakkoConb(i).length + "</td><td>" + kakkoConb(i).join(", ") + "</td></tr>");
+}
+</script> 
+</tbody></table>
+</script>
+
+</body>
+</html>
