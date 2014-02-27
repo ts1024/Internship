@@ -1,0 +1,78 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="Content-Script-Type" content="text/javascript"> 
+<meta http-equiv="Content-Style-Type" content="text/css">
+<script type="text/javascript" charset="utf-8" src="no2_closure.js"></script>
+<title>no2 </title>
+<style>
+body {
+	width:800px;
+	margin: 0 auto;
+}
+body > div {
+	border:solid black 2px;
+	margin-bottom: 10px;
+}
+</style>
+</head>
+<body> 
+
+<!-- 問題 a ここから -->
+<div>
+<h1>a) スタック</h1>
+<table border="1"><tbody>
+<tr><td>code</td><td>実行結果</td><td>スタック</td></tr>
+<script language="javascript">
+var list = ["st = Stack();",
+"st.empty()",
+"st.push(123)",
+"st.push(456)",
+"st.push(789)",
+"st.size()",
+"st.empty()",
+"st.peek()",
+"st.size()",
+"st.pop()",
+"st.size()",
+"st.peek()"];
+for (var i = 0, len = list.length; i < len; i++) {
+	var str = list[i];
+	var result = eval(str);
+	document.write("<tr><td>" + str + "</td><td>" + (typeof result === "undefined" ? "void" : result) + "</td><td>[" + st.getList().join(", ") + "]</td></tr>");
+}
+</script> 
+</tbody></table>
+</script> 
+</div>
+<!-- 問題 a ここまで -->
+
+
+<!-- 問題 b ここから -->
+<div>
+<h1>b) キュー</h1>
+<table border="1"><tbody>
+<tr><td>code</td><td>実行結果</td><td>キュー</td></tr>
+<script language="javascript">
+var list = ["qu = Queue()",
+"qu.add(123)",
+"qu.add(456)",
+"qu.add(789)",
+"qu.size()",
+"qu.peek()",
+"qu.size()",
+"qu.remove()",
+"qu.size()",
+"qu.peek()"];
+for (var i = 0, len = list.length; i < len; i++) {
+	var str = list[i];
+	var result = eval(str);
+	document.write("<tr><td>" + str + "</td><td>" + (typeof result === "undefined" ? "void" : result) + "</td><td>[" + qu.getList().join(", ") + "]</td></tr>");
+}
+</script> 
+</tbody></table>
+</div>
+<!-- 問題 b ここまで -->
+</body>
+</html>
