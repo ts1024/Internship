@@ -1,0 +1,102 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="Content-Script-Type" content="text/javascript"> 
+<meta http-equiv="Content-Style-Type" content="text/css"> 
+<title>no1</title>
+<script language="javascript">
+function $(id){
+	return document.getElementById(id);
+}
+</script>
+<style>
+body {
+	width:800px;
+	margin: 0 auto;
+}
+body > div {
+	border:solid black 2px;
+	margin-bottom: 10px;
+}
+</style>
+</head>
+<body> 
+
+<!-- 問題 a ここから -->
+<div>
+<h1>a)</h1>
+<p>入力：<input id="input_a"></p>
+<p>出力（重複する文字はない）：<input id="output_a"></p>
+</div>
+<script language="javascript">
+$("input_a").onkeyup = function(evt){
+	var str = $("input_a").value;
+	var charList = {};
+	for (var i = 0, len = str.length; i < len; i++) {
+		if (charList[str[i]]) {
+			$("output_a").value = "false";
+			return;
+		}
+		charList[str[i]] = true;
+	}
+	$("output_a").value = "true";
+};
+</script> 
+<!-- 問題 a ここまで -->
+
+
+<!-- 問題 b ここから -->
+<div>
+<h1>b)</h1>
+<p>入力s1：<input id="input_b1"></p>
+<p>入力s2：<input id="input_b2"></p>
+<p>出力（s2はs1の一部）：<input id="output_b"></p>
+</div>
+<script language="javascript">
+$("input_b1").onkeyup = $("input_b2").onkeyup = function(){
+	var str1 = $("input_b1").value;
+	var str2 = $("input_b2").value;
+	if (str1 && str2) {
+		$("output_b").value = String(isSubstring(str1, str2));
+	} else {
+		$("output_b").value = "";
+	}
+};
+function isSubstring(str1, str2){
+	return str1.indexOf(str2) !== -1;
+}
+</script> 
+<!-- 問題 b ここまで -->
+
+
+
+<!-- 問題 c ここから 未完成
+<div>
+<h1>c)</h1>
+<p>入力s1：<input id="input_c1"></p>
+<p>入力s2：<input id="input_c2"></p>
+<p>出力（s2がs1を回転させたもの）：<input id="output_c"></p>
+</div>
+<script language="javascript">
+$("input_c1").onkeyup = $("input_c2").onkeyup = function(){
+	var str1 = $("input_c1").value;
+	var str2 = $("input_c2").value;
+	if (str1 && str2) {
+		if (str1.length === str2.length) {
+			var rotation_str1 = "";
+			for (var i = 0, len = str1.length; i < len; i++){
+				rotation_str1 += str1[i];
+			}
+			$("output_c").value = String(isSubstring(reverse_str1, str2));
+		} else {
+			$("output_c").value = "false";
+		}
+	} else {
+		$("output_c").value = "";
+	}
+};
+</script> 
+<!-- 問題 c ここまで -->
+</body>
+</html>
