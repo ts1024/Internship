@@ -60,7 +60,6 @@ Queue.prototype = {
 	add: function (value){
 		// 配列のpush関数は配列の最後に追加し、追加後のリストの長さを返す
 		this._list.push(value);
-		return value;
 	},
 	peek: function (){
 		return this._list[0];

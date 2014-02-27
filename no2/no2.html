@@ -25,10 +25,11 @@ body > div {
 <table border="1"><tbody>
 <tr><td>code</td><td>実行結果</td><td>スタック</td></tr>
 <script language="javascript">
-var list = ["var st = new Stack();",
+var list = ["st = new Stack();",
 "st.empty()",
 "st.push(123)",
 "st.push(456)",
+"st.push(789)",
 "st.size()",
 "st.empty()",
 "st.peek()",
@@ -39,7 +40,7 @@ var list = ["var st = new Stack();",
 for (var i = 0, len = list.length; i < len; i++) {
 	var str = list[i];
 	var result = eval(str);
-	document.write("<tr><td>" + str + "</td><td>" + (typeof result === "undefined" ? "" : result) + "</td><td>[" + st._list.join(", ") + "]</td></tr>");
+	document.write("<tr><td>" + str + "</td><td>" + (typeof result === "undefined" ? "void" : result) + "</td><td>[" + st._list.join(", ") + "]</td></tr>");
 }
 </script> 
 </tbody></table>
@@ -54,9 +55,10 @@ for (var i = 0, len = list.length; i < len; i++) {
 <table border="1"><tbody>
 <tr><td>code</td><td>実行結果</td><td>キュー</td></tr>
 <script language="javascript">
-var list = ["var qu = new Queue()",
+var list = ["qu = new Queue()",
 "qu.add(123)",
 "qu.add(456)",
+"qu.add(789)",
 "qu.size()",
 "qu.peek()",
 "qu.size()",
@@ -66,7 +68,7 @@ var list = ["var qu = new Queue()",
 for (var i = 0, len = list.length; i < len; i++) {
 	var str = list[i];
 	var result = eval(str);
-	document.write("<tr><td>" + str + "</td><td>" + (typeof result === "undefined" ? "" : result) + "</td><td>[" + qu._list.join(", ") + "]</td></tr>");
+	document.write("<tr><td>" + str + "</td><td>" + (typeof result === "undefined" ? "void" : result) + "</td><td>[" + qu._list.join(", ") + "]</td></tr>");
 }
 </script> 
 </tbody></table>
