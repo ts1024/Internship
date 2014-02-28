@@ -1,16 +1,64 @@
 ﻿
 function fn_no7(N, K, RC, output){
+    var start = new Date().getTime();
 	var len = RC.length;
 	var result = "";
 	if (N && K && len) {
 		debug.log("RC配列：");
 		debug.log(RC);
 		fn_1(RC, null, null, output);
+	} else {
+		output(result);
 	}
-	output(result);
+    console.log("計算時間：" + (new Date().getTime()-start) + "ms");
 }
 
 function fn_1(RC, launchCount, _history, output){
+	if (!_history) _history = [];
+	if (!launchCount) launchCount = 0;
+	if (RC.length === 0){
+		// 全部破壊完了	
+//		console.log("発射回数：" + launchCount);
+//		console.log(_history);
+		output(launchCount, _history);
+		return launchCount;
+	}
+	// 各行・各列の隕石の数をカウント
+	var res = countArray(RC);
+	var array_X = res[0];
+	var array_Y = res[1];
+	debug.log("各行・各列の隕石の数をカウント");
+	debug.log(res);
+	
+	
+	for (var i = 0, len = array_X.length; i < len ; i++){
+		if (array_X[i]) {
+			var newRC = [];
+			var newHistory = _history.concat([["x", i]]);
+			for (var j = 0, len2 = RC.length; j < len2; j++){
+				if (RC[j][0] !== i) {
+					newRC.push(RC[j]);
+				}
+			}
+			fn_1(newRC, launchCount + 1, newHistory, output);
+		}
+	}
+	for (var i = 0, len = array_Y.length; i < len ; i++){
+		if (array_Y[i]) {
+			var newRC = [];
+			var newHistory = _history.concat([["y", i]]);
+			for (var j = 0, len2 = RC.length; j < len2; j++){
+				if (RC[j][1] !== i) {
+					newRC.push(RC[j]);
+				}
+			}
+			fn_1(newRC, launchCount + 1, newHistory, output);
+		}
+	}
+}
+
+// 一番多い隕石数の行or列だけ潰していくのはNG
+function fn_1_botsu(RC, launchCount, _history, output){
 	if (!_history) _history = [];
 	if (!launchCount) launchCount = 0;
 	if (RC.length === 0){
