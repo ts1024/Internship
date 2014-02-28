@@ -27,5 +27,5 @@ function multiply(a, b) {
 }
 
 function devide(a, b) {
-	
+	// ‚±‚ê‚Í•ú’u‚µ‚Ä‘¼‚Ì–â‘è‚Ö
 }
