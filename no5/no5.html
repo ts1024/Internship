@@ -1,0 +1,81 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="Content-Script-Type" content="text/javascript"> 
+<meta http-equiv="Content-Style-Type" content="text/css">
+<script type="text/javascript" charset="utf-8" src="no5.js"></script>
+<title>no5</title>
+<script language="javascript">
+function $(id){
+	return document.getElementById(id);
+}
+</script>
+<style>
+body {
+	width:800px;
+	margin: 0 auto;
+}
+body > div {
+	border:solid black 2px;
+	margin-bottom: 10px;
+}
+td {
+	width: 20px;
+	text-align:right;
+}
+</style>
+</head>
+<body> 
+
+<!-- 問題 ここから -->
+<div>
+<h1>no 5</h1>
+<p>入力：<input size="50" id="input" value="1, 2, 4, 7, 10, 11, 7, 12, 7, 8, 16, 18, 19"></p>
+<table border="1"><tbody id="tbody">
+</tbody></table>
+<p>出力m：<input id="output_m"></p>
+<p>出力n：<input id="output_n"></p>
+</div>
+<script language="javascript">
+$("input").onkeyup = function(){
+	var str = $("input").value;
+	str = str.replace(/[^0-9-]+/g, " ").trim().split(" ");
+	str = eval("[" + str.join(",") + "]");
+	var output = function(m, n){
+		if (n != -1 && m != -1){
+			var td = document.querySelectorAll("#tbody td");
+			td[m + 1].style.color = "blue";
+			td[m + 1 + str.length + 1].style.color = "blue";
+			td[m + 1].style.fontWeight = "bold";
+			td[m + 1 + str.length + 1].style.fontWeight = "bold";
+			
+			td[n + 1].style.color = "red";
+			td[n + 1 + str.length + 1].style.color = "red";
+			td[n + 1].style.fontWeight = "bold";
+			td[n + 1 + str.length + 1].style.fontWeight = "bold";
+		}
+		$("output_m").value = String(m);
+		$("output_n").value = String(n);
+	};
+	
+	var htmlStr = "<tr><td>値</td>";
+	for (var i = 0, len = str.length; i < len; i++){
+		htmlStr += "<td>" + str[i] + "</td>";
+	}
+	htmlStr += "</tr>";
+	htmlStr += '<tr><td style="width:100px;">インデックス</td>';
+	for (var i = 0, len = str.length; i < len; i++){
+		htmlStr += "<td>" + i + "</td>";
+	}
+	htmlStr += "</tr>";
+	$("tbody").innerHTML = htmlStr;
+	
+	
+	fn_no5(str, output);
+};
+$("input").onkeyup();
+</script>
+
+</body>
+</html>
