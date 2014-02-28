@@ -1,14 +1,13 @@
 ﻿
 function fn_no7(N, K, RC, output){
     var start = new Date().getTime();
-	var len = RC.length;
-	var result = "";
-	if (N && K && len) {
+	var len = RC.length; // Kに相当
+	if (N && len) {
 		debug.log("RC配列：");
 		debug.log(RC);
 		fn_1(RC, null, null, output);
 	} else {
-		output(result);
+		output("");
 	}
     console.log("計算時間：" + (new Date().getTime()-start) + "ms");
 }
@@ -16,6 +15,7 @@ function fn_no7(N, K, RC, output){
 function fn_1(RC, launchCount, _history, output){
 	if (!_history) _history = [];
 	if (!launchCount) launchCount = 0;
+	
 	if (RC.length === 0){
 		// 全部破壊完了	
 //		console.log("発射回数：" + launchCount);
@@ -57,6 +57,22 @@ function fn_1(RC, launchCount, _history, output){
 	}
 }
 
+
+function countArray(RC){
+	var array_X = [];
+	var array_Y = [];
+	for (var i = 0, len = RC.length; i < len; i++){
+		var x = RC[i][0];
+		var y = RC[i][1];
+		array_X[x] = array_X[x] || 0;
+		array_X[x]++;
+		array_Y[y] = array_Y[y] || 0;
+		array_Y[y]++;
+	}
+	return [array_X, array_Y];
+}
+
+/*
 // 一番多い隕石数の行or列だけ潰していくのはNG
 function fn_1_botsu(RC, launchCount, _history, output){
 	if (!_history) _history = [];
@@ -118,20 +134,6 @@ function fn_1_botsu(RC, launchCount, _history, output){
 		}
 	}
 }
-
-function countArray(RC){
-	var array_X = [];
-	var array_Y = [];
-	for (var i = 0, len = RC.length; i < len; i++){
-		var x = RC[i][0];
-		var y = RC[i][1];
-		array_X[x] = array_X[x] || 0;
-		array_X[x]++;
-		array_Y[y] = array_Y[y] || 0;
-		array_Y[y]++;
-	}
-	return [array_X, array_Y];
-}
 function max(array){
 	var value = -1;
 	var result = [];
@@ -145,6 +147,7 @@ function max(array){
 	}
 	return [value, result]
 }
+//*/
 
 if ((!typeof window.console !== "undefined" && console.log)) {
 	window.console = window.console || {log:function(){}};
