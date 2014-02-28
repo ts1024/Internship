@@ -1,0 +1,155 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="Content-Script-Type" content="text/javascript"> 
+<meta http-equiv="Content-Style-Type" content="text/css">
+<script type="text/javascript" charset="utf-8" src="no7.js"></script>
+<title>no7</title>
+<script language="javascript">
+function $(id){
+	return document.getElementById(id);
+}
+</script>
+<style>
+body {
+	width:800px;
+	margin: 0 auto;
+}
+body > div {
+	border:solid black 2px;
+	margin-bottom: 10px;
+}
+#result table  {
+	margin-bottom: 10px;
+}
+#result td {
+	width: 20px;
+	height: 20px;
+	text-align:center;
+}
+</style>
+</head>
+<body> 
+
+<!-- 問題 ここから -->
+<div>
+<h1>no 7</h1>
+<p>入力：N=<input id="input_N" value="3"></p>
+<p>入力：K=<input id="input_K" value="4"></p>
+<p>入力：(R, C)=<input size="100" id="input_RC" value="(0, 0), (0, 2), (1, 1), (2, 1)"></p>
+<div id="result">
+
+</div>
+<p>出力：N=<input id="output"></p>
+<div id="links">
+
+</div>
+</div>
+<script language="javascript">
+$("input_N").onkeyup = $("input_K").onkeyup = $("input_RC").onkeyup = function(){
+	var N = Number($("input_N").value.replace(/[^0-9]+/g, ""));
+	var K = Number($("input_K").value.replace(/[^0-9]+/g, ""));
+	var RC_tmp = $("input_RC").value.replace(/\(/g, "[").replace(/\)/g, "]");
+	var RC = [];
+	RC_tmp.replace(/\[\s*(\d+)\s*,\s*(\d+)\s*\]\s*(?:$|,)/g, function (all, x, y){
+		RC.push([Number(x), Number(y)]);
+	});
+	var RC_new = [];
+	for (var i = 0, len = RC.length; i < len; i++){
+		var x = RC[i][0];
+		var y = RC[i][1];
+		RC_new[x] = RC_new[x] || [];
+		RC_new[x][y] = true;
+	}
+	
+	var resultCache_count = null;
+	var resultCache = [];
+	var output = function(num, _history){
+		if (num) {
+			if (resultCache_count === null || resultCache_count > num) {
+				resultCache_count = num;
+				$("output").value = String(num) + "発";
+				
+				if (_history) {
+					var launchPosition = {};
+					for (var i = 0, len = _history.length; i < len ; i++){
+						launchPosition[_history[i][0] + _history[i][1]] = true;
+					}
+					var htmlStr = "";
+					for (var x = 0; x < N; x++){
+						htmlStr += "<tr>";
+						RC_new[x] = RC_new[x] || [];
+						var launchX = launchPosition["x" + x];
+						for (var y = 0; y < N; y++){
+							var isAsteroid = RC_new[x][y];
+							var launchY = launchPosition["y" + y];
+							if (launchX) {
+								if (launchY) {
+									htmlStr += "<td><s>" + (isAsteroid ? "Φ" : "｜") + "</s></td>";
+								} else {
+									htmlStr += "<td><s>" + (isAsteroid ? "○" : "　") + "</s></td>";
+								}
+							} else {
+								if (launchY) {
+									htmlStr += "<td>" + (isAsteroid ? "Φ" : "｜") + "</td>";
+								} else {
+									htmlStr += "<td>" + (isAsteroid ? "○" : "　") + "</td>";
+								}
+							}
+						}
+						htmlStr += "</tr>";
+					}
+					makeTable(htmlStr);
+				}
+			}
+		}
+	};
+	$("result").innerHTML = "";
+	var htmlStr = "";
+	for (var x = 0; x < N; x++){
+		htmlStr += "<tr>";
+		RC_new[x] = RC_new[x] || [];
+		for (var y = 0; y < N; y++){
+			htmlStr += "<td>" + (RC_new[x][y] ? "○" : "") + "</td>";
+		}
+		htmlStr += "</tr>";
+	}
+	makeTable(htmlStr);
+	
+	fn_no7(N, K, RC, output);
+};
+$("input_RC").onkeyup();
+
+function makeTable(tr_html){
+	var table = document.createElement("table");
+	table.border = "1";
+	var tbody = document.createElement("tbody");
+	table.appendChild(tbody);
+	tbody.innerHTML = tr_html;
+	$("result").appendChild(table);
+	return table;
+}
+
+function make_a(N, RC) {
+	var p = document.createElement("p");
+	var a = document.createElement("a");
+	p.appendChild(a);
+	var K = RC.split(",").length / 2;
+	a.href = "#";
+	a.innerHTML = "N:" + N +  ", K:" + K + ", RC:" + RC;
+	a.onclick = function (){
+		$("input_N").value = N;
+		$("input_K").value = K;
+		$("input_RC").value = RC;
+		$("input_RC").onkeyup();
+	};
+	$("links").appendChild(p);
+}
+make_a(3, "(0, 0), (0, 2), (1, 1), (2, 1)");
+make_a(4, "(0, 0), (0, 2), (1, 1), (2, 1), (3, 2), (2, 2)");
+make_a(7, "(0, 0), (0, 2), (1, 1), (2, 1), (3, 2), (2, 2), (4, 5)");
+</script>
+
+</body>
+</html>
