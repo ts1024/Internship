@@ -55,7 +55,7 @@ $("input_N").onkeyup = $("input_K").onkeyup = $("input_RC").onkeyup = function()
 	RC_tmp.replace(/\[\s*(\d+)\s*,\s*(\d+)\s*\]\s*(?:$|,)/g, function (all, x, y){
 		RC.push([Number(x), Number(y)]);
 	});
-	var RC_new = [];
+	window.RC_new = [];
 	for (var i = 0, len = RC.length; i < len; i++){
 		var x = RC[i][0];
 		var y = RC[i][1];
@@ -111,7 +111,7 @@ $("input_N").onkeyup = $("input_K").onkeyup = $("input_RC").onkeyup = function()
 		htmlStr += "<tr>";
 		RC_new[x] = RC_new[x] || [];
 		for (var y = 0; y < N; y++){
-			htmlStr += "<td>" + (RC_new[x][y] ? "○" : "") + "</td>";
+			htmlStr += '<td onclick="change(this, ' + x + ', ' + y + ')">' + (RC_new[x][y] ? "○" : "　") + "</td>";
 		}
 		htmlStr += "</tr>";
 	}
@@ -119,6 +119,23 @@ $("input_N").onkeyup = $("input_K").onkeyup = $("input_RC").onkeyup = function()
 	
 	fn_no7(N, K, RC, output);
 };
+function change(elem, _x, _y) {
+	var now = window.RC_new[_x][_y];
+	elem.innerHTML = !now ? "○" : "　";
+	var RC_tmp = $("input_RC").value.replace(/\(/g, "[").replace(/\)/g, "]");
+	var RC = [];
+	RC_tmp.replace(/\[\s*(\d+)\s*,\s*(\d+)\s*\]\s*(?:$|,)/g, function (all, x, y){
+		x = Number(x);
+		y = Number(y);
+		if (now) {
+			if (x == _x && y == _y) return;
+		}
+		RC.push("(" + x + ", " + y +  ")");
+	});
+	if (!now) RC.push("(" + _x + ", " + _y +  ")");
+	$("input_RC").value = RC.join(", ");
+	$("input_RC").onkeyup();
+}
 $("input_RC").onkeyup();
 
 function makeTable(tr_html){
