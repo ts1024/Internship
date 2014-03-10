@@ -8,7 +8,5 @@
 
 [no5](http://ts1024.github.io/Internship/no5/no5.html)
 
-[no6](http://ts1024.github.io/Internship/no6/no6.html)
-
 [no7](http://ts1024.github.io/Internship/no7/no7.html)
 
