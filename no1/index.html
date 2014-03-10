@@ -1,0 +1,85 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="Content-Script-Type" content="text/javascript"> 
+<meta http-equiv="Content-Style-Type" content="text/css">
+<script type="text/javascript" charset="utf-8" src="no1.js"></script>
+<title>no1</title>
+<script language="javascript">
+function $(id){
+	return document.getElementById(id);
+}
+</script>
+<style>
+body {
+	width:800px;
+	margin: 0 auto;
+}
+body > div {
+	border:solid black 2px;
+	margin-bottom: 10px;
+}
+</style>
+</head>
+<body> 
+
+<!-- 問題 a ここから -->
+<div>
+<h1>a)</h1>
+<p>入力：<input id="input_a"></p>
+<p>出力（重複する文字はない）：<input id="output_a"></p>
+</div>
+<script language="javascript">
+$("input_a").onkeyup = function(){
+	var str = $("input_a").value;
+	var output = function(str_output){
+		$("output_a").value = String(str_output);
+	};
+	fn_no1_a(str, output);
+};
+</script> 
+<!-- 問題 a ここまで -->
+
+
+<!-- 問題 b ここから -->
+<div>
+<h1>b)</h1>
+<p>入力s1：<input id="input_b1"></p>
+<p>入力s2：<input id="input_b2"></p>
+<p>出力（s2はs1の一部）：<input id="output_b"></p>
+</div>
+<script language="javascript">
+$("input_b1").onkeyup = $("input_b2").onkeyup = function(){
+	var str1 = $("input_b1").value;
+	var str2 = $("input_b2").value;
+	var output = function(str_output){
+		$("output_b").value = String(str_output);
+	};
+	fn_no1_b(str1, str2, output);
+};
+</script> 
+<!-- 問題 b ここまで -->
+
+
+
+<!-- 問題 c ここから -->
+<div>
+<h1>c)</h1>
+<p>入力s1：<input id="input_c1"></p>
+<p>入力s2：<input id="input_c2"></p>
+<p>出力（s2がs1を回転させたもの）：<input id="output_c"></p>
+</div>
+<script language="javascript">
+$("input_c1").onkeyup = $("input_c2").onkeyup = function(){
+	var str1 = $("input_c1").value;
+	var str2 = $("input_c2").value;
+	var output = function(str_output){
+		$("output_c").value = String(str_output);
+	};
+	fn_no1_c(str1, str2, output);
+};
+</script> 
+<!-- 問題 c ここまで -->
+</body>
+</html>
