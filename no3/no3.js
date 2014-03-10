@@ -19,11 +19,13 @@ function kakkoConb (num, flag){
 	}
 	cache[num] = [];
 	var arr_minus1 = cache[num - 1];
+	
+	var tyouhuku = 0;
 	for (var i = 0, len = arr_minus1.length; i < len; i++) {
 		var str = arr_minus1[i];
 		var newStr = [];
 		for (var j = 0, len2 = str.length; j < len2; j++){
-			console.log(str)
+		//	console.log(str)
 			if (str.substring(j, j + 2) === "()"){
 				newStr.push(str.substring(0,j + 1) + "()" + str.substring(j + 1, len2));
 			}
@@ -34,9 +36,12 @@ function kakkoConb (num, flag){
 			for (var k = 0, len3 = newStr.length; k < len3; k++) {
 				if (!cache[num].contains(newStr[k])) {
 					cache[num].push(newStr[k]);
+				} else {
+					tyouhuku++;
 				}
 			}
 		}
 	}
+	window.console && console.log && console.log(num + ":" + tyouhuku);
 	return cache[num];
 }
